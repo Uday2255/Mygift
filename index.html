@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>For My Love 💕</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:'Segoe UI',sans-serif;
+    color:#fff;
+    background:linear-gradient(-45deg,#2b0033,#4d0066,#800040,#330033);
+    background-size:400% 400%;
+    animation:bgMove 12s ease infinite;
+}
+
+@keyframes bgMove{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+}
+
+.container{
+    text-align:center;
+    max-width:90%;
+    z-index:10;
+    transition:opacity 2s ease;
+}
+
+.line{
+    font-size:1.7rem;
+    margin:20px 0;
+    opacity:0;
+    transform:scale(0.8) translateY(40px);
+    transition:all 1.2s ease;
+}
+
+.line.show{
+    opacity:1;
+    transform:scale(1) translateY(0);
+}
+
+.highlight{
+    color:#ff66cc;
+    text-shadow:0 0 15px #ff3399, 0 0 30px #ff0066;
+}
+
+.signature{
+    margin-top:40px;
+    font-size:2rem;
+    font-style:italic;
+    animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+    from{ text-shadow:0 0 10px #ff66cc;}
+    to{ text-shadow:0 0 30px #ff0066;}
+}
+
+.heart-bg{
+    position:absolute;
+    font-size:20rem;
+    opacity:0.08;
+    animation:beat 4s infinite ease-in-out;
+}
+
+@keyframes beat{
+    0%,100%{transform:scale(1);}
+    50%{transform:scale(1.1);}
+}
+
+.floating{
+    position:absolute;
+    font-size:2rem;
+    animation:float 10s linear infinite;
+}
+
+@keyframes float{
+    0%{transform:translateY(100vh) rotate(0deg);}
+    100%{transform:translateY(-20vh) rotate(360deg);opacity:0;}
+}
+
+.sparkle{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    opacity:0.7;
+    animation:spark 2s infinite alternate;
+}
+
+@keyframes spark{
+    from{opacity:0.2; transform:scale(1);}
+    to{opacity:1; transform:scale(1.5);}
+}
+
+/* Fade */
+.fade-out{
+    opacity:0;
+}
+
+/* Flying Kiss */
+.kiss{
+    position:absolute;
+    bottom:10%;
+    left:50%;
+    transform:translateX(-50%) scale(0.5);
+    font-size:5rem;
+    opacity:0;
+}
+
+.kiss.fly{
+    animation:flyKiss 3s ease forwards;
+}
+
+@keyframes flyKiss{
+    0%{
+        transform:translate(-50%,0) scale(0.5);
+        opacity:1;
+    }
+    40%{
+        transform:translate(-50%,-150px) scale(1.5);
+    }
+    100%{
+        transform:translate(-50%,-350px) scale(0.8);
+        opacity:0;
+    }
+}
+
+/* Mwah text */
+.mwah{
+    position:absolute;
+    bottom:20%;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:1.5rem;
+    opacity:0;
+    letter-spacing:2px;
+}
+
+.mwah.show{
+    animation:mwahFade 2.5s ease forwards;
+}
+
+@keyframes mwahFade{
+    0%{opacity:0;}
+    40%{opacity:1;}
+    100%{opacity:0;}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="heart-bg">❤️</div>
+
+<div class="container" id="mainContent">
+    <div class="line">My Dearest Love..... ❤️❤️❤️</div>
+    <div class="line">Sometimes words feel too small..... 💗💗💗</div>
+    <div class="line">But my heart speaks your name every second...</div>
+    <div class="line">You are my <span class="highlight">sunrise</span> and my <span class="highlight">peace</span>...</div>
+    <div class="line">My forever, my always... 💞</div>
+    <div class="line">On this Kiss Day...</div>
+    <div class="line">I promise to choose you in <span class="highlight">every lifetime</span> 💫</div>
+    <div class="line signature">With all my kisses... Yours forever 💋</div>
+</div>
+
+<div class="kiss" id="kiss">💋💋💋</div>
+<div class="mwah" id="mwah">Mwah... 💕</div>
+
+<script>
+
+// Line animation
+const lines=document.querySelectorAll(".line");
+let i=0;
+
+function showLines(){
+    if(i<lines.length){
+        lines[i].classList.add("show");
+        i++;
+        setTimeout(showLines,1600);
+    }
+}
+setTimeout(showLines,1000);
+
+// Floating hearts
+function createHeart(){
+    const heart=document.createElement("div");
+    heart.className="floating";
+    heart.innerHTML=["💕","❤️","💖","💗","💞"][Math.floor(Math.random()*5)];
+    heart.style.left=Math.random()*100+"vw";
+    heart.style.fontSize=(20+Math.random()*30)+"px";
+    heart.style.animationDuration=(6+Math.random()*8)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),14000);
+}
+setInterval(createHeart,800);
+
+// Sparkles
+function sparkle(){
+    const s=document.createElement("div");
+    s.className="sparkle";
+    s.style.left=Math.random()*100+"vw";
+    s.style.top=Math.random()*100+"vh";
+    document.body.appendChild(s);
+    setTimeout(()=>s.remove(),2000);
+}
+setInterval(sparkle,300);
+
+// After 15 sec → elegant flying kiss
+setTimeout(() => {
+
+    const container = document.getElementById("mainContent");
+    container.classList.add("fade-out");
+
+    setTimeout(() => {
+
+        container.style.display = "none";
+
+        const kiss = document.getElementById("kiss");
+        const mwah = document.getElementById("mwah");
+
+        kiss.classList.add("fly");
+        mwah.classList.add("show");
+
+        // Bring message back
+        setTimeout(() => {
+            container.style.display = "block";
+            container.classList.remove("fade-out");
+        }, 4000);
+
+    }, 2000);
+
+}, 15000);
+
+</script>
+
+</body>
+</html>
